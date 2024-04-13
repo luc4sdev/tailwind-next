@@ -3,7 +3,7 @@ import { BarChart, CheckSquare, Flag, Home, Search, SquareStack, Users } from 'l
 import { NavItem } from "./NavItem";
 import { UsedSpaceWidget } from "./UsedSpaceWidget";
 import { Profile } from "./Profile";
-import { InputControl, InputPrefix, InputRoot } from "../Input";
+import { InputControl, InputPrefix, InputRoot } from "../Form/Input";
 export function Sidebar() {
     return (
         <aside className="flex flex-col gap-6 border-r border-zinc-200 px-5 py-8">
