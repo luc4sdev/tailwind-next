@@ -7,7 +7,8 @@ interface RootProps extends ComponentProps<'div'> { }
 type FileInputContextType = {
     id: string;
     files: File[];
-    onFilesSelected: (files: File[]) => void;
+    onFilesSelected: (files: File[], multiple: boolean) => void;
+    handleDeleteFile: (file: File) => void;
 }
 
 const FileInputContext = createContext({} as FileInputContextType)
@@ -16,8 +17,32 @@ export function Root(props: RootProps) {
     const id = useId()
     const [files, setFiles] = useState<File[]>([])
 
+    function handleSelectedFiles(files: File[], multiple: boolean) {
+        if (multiple) {
+            setFiles((state) => [...state, ...files])
+        }
+        else {
+            setFiles(files)
+        }
+    }
+
+    function handleDeleteFile(fileToBeDeleted: File) {
+        setFiles((state) => {
+            const tempFiles = [...state]
+
+            const index = tempFiles.findIndex(file => file.name === fileToBeDeleted.name)
+            if (index === -1) {
+                return tempFiles
+            }
+            tempFiles.splice(index, 1)
+
+            return tempFiles
+        })
+
+    }
+
     return (
-        <FileInputContext.Provider value={{ id, files, onFilesSelected: setFiles }}>
+        <FileInputContext.Provider value={{ id, files, onFilesSelected: handleSelectedFiles, handleDeleteFile }}>
             <div {...props} />
         </FileInputContext.Provider>
     )

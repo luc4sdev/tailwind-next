@@ -1,7 +1,11 @@
-import { Mail } from "lucide-react";
+import { Bold, Italic, Link, List, ListOrdered, Mail } from "lucide-react";
 import { InputControl, InputPrefix, InputRoot } from "./components/Form/Input";
 import { SettingsTabs } from "./components/SettingsTabs";
 import * as FileInput from './components/Form/FileInput'
+import * as Select from './components/Form/Select'
+import { CountrySelect } from "./components/CountrySelect";
+import { Button } from "./components/Button";
+import { Textarea } from "./components/Form/Textarea";
 
 export default function Home() {
   return (
@@ -86,6 +90,8 @@ export default function Home() {
             <label htmlFor="country" className="text-sm font-medium text-zinc-700">
               Country
             </label>
+
+            <CountrySelect />
             <div>
 
             </div>
@@ -95,9 +101,20 @@ export default function Home() {
             <label htmlFor="timezone" className="text-sm font-medium text-zinc-700">
               Timezone
             </label>
-            <div>
+            <Select.Root name="timezone">
+              <Select.Trigger>
+                <Select.Value placeholder="Select your timezone..." />
+              </Select.Trigger>
 
-            </div>
+              <Select.Content>
+                <Select.Item value="utc-3">
+                  <Select.ItemText>
+                    Pacific Standard Time (PST)
+                    <span className="text-sm text-zinc-500">UTC 08:00</span>
+                  </Select.ItemText>
+                </Select.Item>
+              </Select.Content>
+            </Select.Root>
           </div>
 
 
@@ -107,8 +124,48 @@ export default function Home() {
               <span className="text-sm font-normal text-zinc-500 block mt-0.5">Write a short introduction.</span>
             </label>
 
-            <div>
+            <div className="flex flex-col gap-3">
+              <div className="grid gap-3 lg:grid-cols-2">
+                <Select.Root defaultValue="normal">
+                  <Select.Trigger>
+                    <Select.Value />
+                  </Select.Trigger>
 
+                  <Select.Content>
+                    <Select.Item value="normal">
+                      <Select.ItemText>Normal text</Select.ItemText>
+                    </Select.Item>
+                    <Select.Item value="md">
+                      <Select.ItemText>Markdown</Select.ItemText>
+                    </Select.Item>
+                  </Select.Content>
+                </Select.Root>
+                <div className="flex items-center gap-1">
+                  <Button variant="ghost">
+                    <Bold className="h-4 w-4 text-zinc-400" strokeWidth={3} />
+                  </Button>
+                  <Button variant="ghost">
+                    <Italic className="h-4 w-4 text-zinc-400" strokeWidth={3} />
+                  </Button>
+                  <Button variant="ghost">
+                    <Link className="h-4 w-4 text-zinc-400" strokeWidth={3} />
+                  </Button>
+                  <Button variant="ghost">
+                    <List className="h-4 w-4 text-zinc-400" strokeWidth={3} />
+                  </Button>
+                  <Button variant="ghost">
+                    <ListOrdered
+                      className="h-4 w-4 text-zinc-400"
+                      strokeWidth={3}
+                    />
+                  </Button>
+                </div>
+              </div>
+              <Textarea
+                name="bio"
+                id="bio"
+                defaultValue="I'm a Product Designer based in Melbourne, Australia. I specialise in UX/UI design, brand strategy, and Webflow development."
+              />
             </div>
           </div>
 
@@ -121,6 +178,7 @@ export default function Home() {
 
             <FileInput.Root>
               <FileInput.Trigger />
+              <FileInput.FileList />
               <FileInput.Control multiple />
             </FileInput.Root>
           </div>
