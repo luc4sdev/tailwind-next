@@ -6,46 +6,56 @@ import * as Select from './components/Form/Select'
 import { CountrySelect } from "./components/CountrySelect";
 import { Button } from "./components/Button";
 import { Textarea } from "./components/Form/Textarea";
+import { ThemeButton } from "./components/ThemeButton";
 
 export default function Home() {
   return (
     <>
-      <h1 className="text-3xl font-medium text-zinc-900">Settings</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-medium text-zinc-900 dark:text-zinc-100">Settings</h1>
+        <ThemeButton />
+      </div>
 
       <SettingsTabs />
 
       <div className="mt-6 flex flex-col">
-        <div className="flex justify-between items-center pb-5 border-b border-zinc-200">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-center justify-between pb-5 border-b border-zinc-200 dark:border-zinc-700">
           <div className="space-y-1">
-            <h2 className="text-lg font-medium text-zinc-900">Personal Info</h2>
-            <span className="text-sm text-zinc-500">Update your photo and personal details here.</span>
+            <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">Personal Info</h2>
+            <span className="text-sm text-zinc-500 dark:text-zinc-400">Update your photo and personal details here.</span>
           </div>
           <div className="flex items-center gap-2">
-            <button type="button" className="rounded-lg px-4 py-2 text-sm font-semibold shadow-sm border border-zinc-300 text-zinc-700 hover:bg-zinc-50">Cancel</button>
-            <button type="submit" form="settings" className="rounded-lg px-4 py-2 text-sm font-semibold shadow-sm bg-violet-600 text-white hover:bg-violet-700">
+            <Button type="button" variant="outline">Cancel</Button>
+            <Button type="submit" form="settings" variant="primary">
               Save
-            </button>
+            </Button>
           </div>
         </div>
 
-        <form id="settings" className="mt-6 flex flex-col w-full gap-5 divide-y divide-zinc-200">
-          <div className="grid gap-3 grid-cols-form">
-            <label htmlFor="firstName" className="text-sm font-medium text-zinc-700">
+        <form id="settings" className="mt-6 flex flex-col w-full gap-5 divide-y divide-zinc-200 dark:divide-zinc-700">
+          <div className="flex flex-col lg:grid gap-3 lg:grid-cols-form">
+            <label htmlFor="firstName" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Name
             </label>
-            <div className="grid gap-6 grid-cols-2">
+            <div className="flex flex-col lg:grid gap-6 lg:grid-cols-2">
               <InputRoot>
                 <InputControl id="firstName" defaultValue='Lucas' />
               </InputRoot>
 
-              <InputRoot>
-                <InputControl defaultValue='Pereira' />
-              </InputRoot>
+              <div className="flex flex-col gap-3 lg:block">
+                <label htmlFor="lastName" className="text-sm font-medium text-zinc-700 dark:text-zinc-300 lg:sr-only">
+                  Last name
+                </label>
+
+                <InputRoot>
+                  <InputControl id="lastName" defaultValue='Pereira' />
+                </InputRoot>
+              </div>
             </div>
           </div>
 
-          <div className="grid gap-3 grid-cols-form pt-5">
-            <label htmlFor="email" className="text-sm font-medium text-zinc-700">
+          <div className="flex flex-col lg:grid gap-3 lg:grid-cols-form pt-5">
+            <label htmlFor="email" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Email adrress
             </label>
             <InputRoot>
@@ -60,21 +70,21 @@ export default function Home() {
             </InputRoot>
           </div>
 
-          <div className="grid gap-3 grid-cols-form pt-5">
-            <label htmlFor="photo" className="text-sm font-medium text-zinc-70">
+          <div className="flex flex-col lg:grid gap-3 lg:grid-cols-form pt-5">
+            <label htmlFor="photo" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Your photo
               <span className="text-sm font-normal text-zinc-500 block mt-0.5">This will be displayed on your profile.</span>
             </label>
 
-            <FileInput.Root className="flex items-start gap-5">
+            <FileInput.Root className="flex flex-col lg:flex-row lg:items-start gap-5">
               <FileInput.ImagePreview />
               <FileInput.Trigger />
               <FileInput.Control />
             </FileInput.Root>
           </div>
 
-          <div className="grid gap-3 grid-cols-form pt-5">
-            <label htmlFor="role" className="text-sm font-medium text-zinc-700">
+          <div className="flex flex-col lg:grid gap-3 lg:grid-cols-form pt-5">
+            <label htmlFor="role" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Role
             </label>
             <InputRoot>
@@ -86,8 +96,8 @@ export default function Home() {
             </InputRoot>
           </div>
 
-          <div className="grid gap-3 grid-cols-form pt-5">
-            <label htmlFor="country" className="text-sm font-medium text-zinc-700">
+          <div className="flex flex-col lg:grid gap-3 lg:grid-cols-form pt-5">
+            <label htmlFor="country" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Country
             </label>
 
@@ -97,8 +107,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-3 grid-cols-form pt-5">
-            <label htmlFor="timezone" className="text-sm font-medium text-zinc-700">
+          <div className="flex flex-col lg:grid gap-3 lg:grid-cols-form pt-5">
+            <label htmlFor="timezone" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Timezone
             </label>
             <Select.Root name="timezone">
@@ -118,8 +128,8 @@ export default function Home() {
           </div>
 
 
-          <div className="grid gap-3 grid-cols-form pt-5">
-            <label htmlFor="bio" className="text-sm font-medium text-zinc-70">
+          <div className="flex flex-col lg:grid gap-3 lg:grid-cols-form pt-5">
+            <label htmlFor="bio" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Bio
               <span className="text-sm font-normal text-zinc-500 block mt-0.5">Write a short introduction.</span>
             </label>
@@ -170,8 +180,8 @@ export default function Home() {
           </div>
 
 
-          <div className="grid gap-3 grid-cols-form pt-5">
-            <label htmlFor="projects" className="text-sm font-medium text-zinc-70">
+          <div className="flex flex-col lg:grid gap-3 lg:grid-cols-form pt-5">
+            <label htmlFor="projects" className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
               Portfolio projects
               <span className="text-sm font-normal text-zinc-500 block mt-0.5">Share a few snippets of your work.</span>
             </label>
@@ -184,10 +194,10 @@ export default function Home() {
           </div>
 
           <div className="flex items-center justify-end gap-2 pt-5">
-            <button type="button" className="rounded-lg px-4 py-2 text-sm font-semibold shadow-sm border border-zinc-300 text-zinc-700 hover:bg-zinc-50">Cancel</button>
-            <button type="submit" className="rounded-lg px-4 py-2 text-sm font-semibold shadow-sm bg-violet-600 text-white hover:bg-violet-700">
+            <Button type="button" variant="outline">Cancel</Button>
+            <Button type="submit" form="settings" variant="primary">
               Save
-            </button>
+            </Button>
           </div>
         </form>
       </div>
